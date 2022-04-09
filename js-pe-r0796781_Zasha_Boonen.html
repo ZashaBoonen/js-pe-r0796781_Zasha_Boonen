@@ -19,19 +19,19 @@
                     <div class="row">
                         <div class="col">Voornaam
                             <input type="text" class="form-control" placeholder="Uw voornaam" aria-label="Voornaam"
-                                id="voornaam" required>
+                                id="voornaam">
                         </div>
                         <div class="col">Naam
-                            <input type="text" class="form-control" placeholder="Uw naam" aria-label="Uw naam" id="naam"
-                                required>
+                            <input type="text" class="form-control" placeholder="Uw naam" aria-label="Uw naam"
+                                id="naam">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="username" class="form-label">Gebruikersnaam</label>
+                            <label for="gebruikersnaam" class="form-label">Gebruikersnaam</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" placeholder="u911236" required>
+                                <input type="text" class="form-control" id="gebruikersnaam" placeholder="u911236">
                                 <div class="invalid-feedback">
                                     Uw gebruikersnaam is nodig.
                                 </div>
@@ -59,13 +59,12 @@
                     </div>
                     <div class="form-group">
                         <label for="inputAres">Adres</label>
-                        <input type="text" class="form-control" id="adres" placeholder="Uw adres en huisnummer"
-                            required>
+                        <input type="text" class="form-control" id="adres" placeholder="Uw adres en huisnummer">
                     </div>
                     <div class="row">
                         <div class="col">
                             <label for="land">Land</label>
-                            <select id="land" class="form-select form-control" required>
+                            <select id="land" class="form-select form-control">
                                 <option selected>Kies een land</option>
                                 <option value="1">België</option>
                                 <option value="2">Nederland</option>
@@ -74,7 +73,7 @@
                         </div>
                         <div class="col">
                             <label for="provincie">Provincie</label>
-                            <select id="provincie" class="form-select form-control" required>
+                            <select id="provincie" class="form-select form-control" x>
                                 <option selected>Kies een provincie</option>
                                 <option value="1">Limburg</option>
                                 <option value="2">Antwerpen</option>
@@ -138,7 +137,7 @@
                     <hr noshade>
                     <div class="row">
                         <span class="input-group-btn"></span>
-                        <button type="submit" class="btn btn-primary">Wave your magic wand</button>
+                        <button type="submit" id="btn" class="btn btn-primary">Wave your magic wand</button>
                     </div>
                 </form>
             </div>
@@ -151,7 +150,7 @@
         const form = document.getElementById('form');
         const voornaam = document.querySelector('voornaam');
         const naam = document.querySelector('naam');
-        const username = document.querySelector('username');
+        const gebruikersnaam = document.querySelector('gebruikersnaam');
         const emailadres = document.querySelector('emailadres');
         const wachtwoord1 = document.querySelector('wachtwoord1');
         const wachtwoord2 = document.querySelector('wachtwoord2');
@@ -165,14 +164,15 @@
         const exampleRadios2 = document.querySelector('exampleRadios2');
         const exampleRadios3 = document.querySelector('exampleRadios3');
         const exampleRadios4 = document.querySelector('exampleRadios4');
+        let arrayError = [];
 
-        form.addEventListener("submit", (e) => {
+        //klik op knop -> trigger validateForm
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-
-            console.log("Form is ingevuld")
             validateForm();
         });
 
+        //controleer je alle velden of andere functies aanspreken
         function validateForm() {
             checkEmptyField();
             validateEmail();
@@ -181,24 +181,38 @@
             checkPC();
         };
 
+        //checken of het niet leeg is
         function checkEmptyField() {
-            if (voornaam.value === '') {
-                error(voornaam, 'Voornaam moet ingevuld zijn.')
+            if (voornaam.value.trim() === "") {
+                errorMsg.innerHTML += "Het veld voornaam is vereist.";
             } else {
-                succes(voornaam);
+                errorMsg[serial].innerHTML += "";
             }
-            if (naam.value === '') {}
-            if (username.value === '') {}
-            if (adres.value === '') {}
-            if (land.value === '') {}
-            if (provincie.value === '') {}
-
-        };
-
-        function error(input, message) {
-            const error = input.error;
-            const err = formControl.querySelector('error');
-            err.innerText = message;
+            if (naam.value.trim() === "") {
+                errorMsg[serial].innerHTML += "Het veld naam is vereist.";
+            } else {
+                errorMsg[serial].innerHTML += "";
+            }
+            if (gebruikersnaam.value.trim() === "") {
+                errorMsg[serial].innerHTML += "Het veld gebruikersnaam is vereist.";
+            } else {
+                errorMsg[serial].innerHTML += "";
+            }
+            if (adres.value.trim() === "") {
+                errorMsg[serial].innerHTML += "Het veld adres is vereist.";
+            } else {
+                errorMsg[serial].innerHTML += "";
+            }
+            if (land.value.trim() === "") {
+                errorMsg[serial].innerHTML += "Het veld land is vereist.";
+            } else {
+                errorMsg[serial].innerHTML += "";
+            }
+            if (provincie.value.trim() === "") {
+                errorMsg[serial].innerHTML += "Het veld provincie is vereist.";
+            } else {
+                errorMsg[serial].innerHTML += "";
+            }
         };
 
         function validateEmail() {
@@ -216,6 +230,7 @@
         function checkPC() {
 
         };
+        //hier heb ik sommige scripts van https://www.freecodecamp.org/news/learn-javascript-form-validation-by-making-a-form/
     </script>
 </body>
 
